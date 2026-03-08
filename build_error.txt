@@ -1,0 +1,48 @@
+﻿
+> family-tree-frontend@1.0.0 build
+> vite build
+
+[36mvite v5.4.21 [32mbuilding for production...[36m[39m
+transforming...
+[32mΓ£ô[39m 4 modules transformed.
+node.exe : [31mx[39m Build failed in 713ms
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program 
+Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([31mx[39m Build 
+    failed in 713ms:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[31merror during build:
+[31m[vite:css] [postcss] 
+C:/Users/mulha/Desktop/nassab/client/src/index.css:15:5: The 
+`shadow-[0_8px_32px_0_rgba(31,` class does not exist. If 
+`shadow-[0_8px_32px_0_rgba(31,` is a custom class, make sure 
+it is defined within a `@layer` directive.[31m
+file: [36mC:/Users/mulha/Desktop/nassab/client/src/index.css:1
+5:4[31m
+    at Input.error (C:\Users\mulha\Desktop\nassab\client\node_m
+odules\postcss\lib\input.js:135:16)
+    at AtRule.error (C:\Users\mulha\Desktop\nassab\client\node_
+modules\postcss\lib\node.js:146:32)
+    at processApply (C:\Users\mulha\Desktop\nassab\client\node_
+modules\tailwindcss\lib\lib\expandApplyAtRules.js:380:29)
+    at C:\Users\mulha\Desktop\nassab\client\node_modules\tailwi
+ndcss\lib\lib\expandApplyAtRules.js:551:9
+    at C:\Users\mulha\Desktop\nassab\client\node_modules\tailwi
+ndcss\lib\processTailwindFeatures.js:55:50
+    at async plugins (C:\Users\mulha\Desktop\nassab\client\node
+_modules\tailwindcss\lib\plugin.js:38:17)
+    at async LazyResult.runAsync (C:\Users\mulha\Desktop\nassab
+\client\node_modules\postcss\lib\lazy-result.js:293:11)
+    at async compileCSS (file:///C:/Users/mulha/Desktop/nassab/
+client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:36898
+:21)
+    at async Object.transform (file:///C:/Users/mulha/Desktop/n
+assab/client/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js
+:36171:11)
+    at async transform (file:///C:/Users/mulha/Desktop/nassab/c
+lient/node_modules/rollup/dist/es/shared/node-entry.js:21269:16
+)[39m
