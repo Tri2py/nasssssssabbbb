@@ -3,7 +3,7 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import { ThemeProvider } from './context/ThemeContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import PageLoader from './components/PageLoader';
-import LandingPage from './pages/LandingPage';
+import HomeSearch from './pages/HomeSearch';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
@@ -22,11 +22,8 @@ function AppRoutes() {
 
   return (
     <Routes>
-      {/* Public landing page */}
-      <Route
-        path="/"
-        element={user ? <Navigate to="/dashboard" replace /> : <LandingPage />}
-      />
+      {/* الصفحة الرئيسية: بحث عن عوائل (عام بدون تسجيل) */}
+      <Route path="/" element={<HomeSearch />} />
       <Route
         path="/login"
         element={user ? <Navigate to="/dashboard" replace /> : <Login />}

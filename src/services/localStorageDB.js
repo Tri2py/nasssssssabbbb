@@ -89,8 +89,8 @@ export const createFamily = (familyName, originCity, creatorId) => {
   families.push(family);
   setStore(KEYS.families, families);
 
-  // Add creator as admin member
-  addFamilyMember(family.id, creatorId, 'admin');
+  // Add creator as owner (صاحب العائلة — يقبل الطلبات)
+  addFamilyMember(family.id, creatorId, 'owner');
 
   return family;
 };
@@ -376,8 +376,8 @@ export const seedIfNeeded = () => {
     rania, hassan, dina, tarek,
   ]);
   setStore(KEYS.familyMembers, [
-    { family_id: 'fam_ahmad', user_id: demoUser.id, role: 'admin' },
-    { family_id: 'fam_husseini', user_id: demoUser.id, role: 'admin' },
+    { family_id: 'fam_ahmad', user_id: demoUser.id, role: 'owner' },
+    { family_id: 'fam_husseini', user_id: demoUser.id, role: 'owner' },
   ]);
 
   localStorage.setItem(KEYS.seeded, 'true');

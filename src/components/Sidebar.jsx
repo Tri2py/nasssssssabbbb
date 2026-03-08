@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
+import { ThemeToggle } from './ui/ThemeToggle';
 
 const Sidebar = ({
   families = [],
@@ -18,6 +19,7 @@ const Sidebar = ({
   const { isDarkMode, toggleTheme } = useTheme();
 
   const isActive = (path) => location.pathname === path || location.pathname.startsWith(path + '/');
+  const hasOwnerFamily = families.some((f) => f.role === 'owner');
   const hasAdminFamily = families.some((f) => f.role === 'admin');
 
   const handleLogout = async () => {
@@ -86,22 +88,8 @@ const Sidebar = ({
             </Link>
 
             <div className="flex items-center gap-2">
-              {/* Theme Toggle Button */}
-              <button
-                onClick={toggleTheme}
-                className="p-2 rounded-xl text-slate-500 hover:bg-white dark:hover:bg-slate-800 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors shadow-sm"
-                title={isDarkMode ? 'تفعيل المظهر الفاتح' : 'تفعيل المظهر الداكن'}
-              >
-                {isDarkMode ? (
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                  </svg>
-                ) : (
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                  </svg>
-                )}
-              </button>
+              {/* Theme Toggle */}
+              <ThemeToggle />
 
               <button
                 type="button"
@@ -180,10 +168,16 @@ const Sidebar = ({
                           </svg>
                         </div>
                         <span className="flex-1 truncate">{family.family_name}</span>
+                        {family.role === 'owner' && (
+                          <span className="shrink-0 flex h-2.5 w-2.5 relative" title="صاحب العائلة">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500"></span>
+                          </span>
+                        )}
                         {family.role === 'admin' && (
-                          <span className="shrink-0 flex h-2.5 w-2.5 relative">
+                          <span className="shrink-0 flex h-2.5 w-2.5 relative" title="مدير">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" title="مدير"></span>
+                            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
                           </span>
                         )}
                         {isActive(`/family/${family.id}`) && <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1.5 h-8 bg-primary-500 rounded-r-full"></span>}
@@ -252,7 +246,7 @@ const Sidebar = ({
                   <span>طلباتي</span>
                   {isActive('/edit-requests') && <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1.5 h-8 bg-primary-500 rounded-r-full"></span>}
                 </Link>
-                {hasAdminFamily && (
+                {hasOwnerFamily && (
                   <Link
                     to="/edit-requests/admin"
                     className={linkClass('/edit-requests/admin')}
@@ -261,7 +255,7 @@ const Sidebar = ({
                     <svg className={iconClass('/edit-requests/admin')} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                     </svg>
-                    <span>إدارة الطلبات (أدمن)</span>
+                    <span>قبول الطلبات (صاحب العائلة)</span>
                     {isActive('/edit-requests/admin') && <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1.5 h-8 bg-primary-500 rounded-r-full"></span>}
                   </Link>
                 )}

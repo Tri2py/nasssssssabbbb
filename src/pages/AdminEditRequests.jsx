@@ -24,10 +24,10 @@ const AdminEditRequests = () => {
   const loadFamilies = async () => {
     try {
       const response = await familyAPI.getAll();
-      const adminFamilies = (response.data.families || []).filter(f => f.role === 'admin');
-      setFamilies(adminFamilies);
-      if (adminFamilies.length > 0 && !selectedFamily) {
-        setSelectedFamily(adminFamilies[0].id);
+      const ownerFamilies = (response.data.families || []).filter(f => f.role === 'owner');
+      setFamilies(ownerFamilies);
+      if (ownerFamilies.length > 0 && !selectedFamily) {
+        setSelectedFamily(ownerFamilies[0].id);
       }
     } catch (err) {
       setError(err.response?.data?.error || 'حدث خطأ أثناء تحميل العائلات');
@@ -95,7 +95,7 @@ const AdminEditRequests = () => {
             </div>
             <h2 className="text-2xl font-bold text-slate-800 dark:text-slate-100 mb-2">صلاحيات غير كافية</h2>
             <p className="text-slate-500 dark:text-slate-400 font-medium">
-              عذراً، يجب أن تكون مديراً لعائلة واحدة على الأقل للوصول إلى هذه الصفحة.
+              هذه الصفحة خاصة بصاحب العائلة (الأونر) فقط. صاحب العائلة هو من يقبل أو يرفض الطلبات التي يرسلها المدير (الأدمن).
             </p>
           </div>
         </div>
@@ -119,11 +119,11 @@ const AdminEditRequests = () => {
                   </svg>
                 </div>
                 <h1 className="text-3xl font-black text-slate-800 dark:text-white tracking-tight">
-                  إدارة طلبات التعديل
+                  قبول الطلبات
                 </h1>
               </div>
               <p className="text-slate-500 dark:text-slate-400 font-medium">
-                بصفتك مديراً، يمكنك مراجعة، قبول أو رفض التعديلات المقترحة على بيانات العائلة.
+                بصفتك صاحب العائلة، يمكنك قبول أو رفض الطلبات التي يرسلها المدير (إضافة أفراد أو تعديلات) حتى لا تُطبَّق تغييرات دون موافقتك.
               </p>
             </div>
 
